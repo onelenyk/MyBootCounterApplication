@@ -1,5 +1,6 @@
 package com.onelenyk.mybootcounterapplication.local.database.provider
 
+import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.onelenyk.mybootcounterapplication.MainApplication
@@ -9,10 +10,10 @@ import com.onelenyk.mybootcounterapplication.local.database.dao.BootEventDao
 object DBProvider {
     private var roomInstance: Database? = null
 
-    private fun getDb(): Database {
+    private fun getDb(context:Context): Database {
         if (roomInstance == null) {
             roomInstance = Room.databaseBuilder(
-                MainApplication.context, Database::class.java, "Database"
+                context, Database::class.java, "Database"
             )
                 .fallbackToDestructiveMigration()
                 .allowMainThreadQueries()
@@ -24,8 +25,8 @@ object DBProvider {
         return roomInstance as Database
     }
 
-    fun getBootEventDao(): BootEventDao {
-        return getDb().bootEventDao()
+    fun getBootEventDao(context:Context = MainApplication.context): BootEventDao {
+        return getDb(context).bootEventDao()
     }
 
 
