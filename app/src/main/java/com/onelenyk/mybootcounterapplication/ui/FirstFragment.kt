@@ -43,7 +43,7 @@ class FirstFragment : Fragment() {
             }else{
                 val text = bootEvents.mapIndexed { index, bootEventEntity ->
                     "${index} - ${bootEventEntity.timestamp}"
-                }.joinToString { "\n" }
+                }.joinToString("\n")
 
                 text
             }
